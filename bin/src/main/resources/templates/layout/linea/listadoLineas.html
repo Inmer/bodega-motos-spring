@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado Lineas</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoLineas" id="lineas">
+            <div class="container table-responsive">
+                <div class="row ">
+                    <div class="col-md-13">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de lineas</h4>
+                            </div>
+                            <div th:if="${lineas != null and !lineas.empty}">
+                                
+                                <table class="table table-bordered table-dark">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="Nombre"></th>
+                                            <th th:text="Linea"></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="linea, contador : ${lineas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${linea.nombre}]] </td>
+                                            <td>
+                                                <p th:each= "marca : ${marcas}">
+                                                    <span th:if="${marca.id_marca} eq ${linea.id_marca}" >  [[${marca.nombre}]]</span>
+                                                    
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarLinea/} + ${linea.id_linea}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> Editar
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarLinea(id_linea=${linea.id_linea})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${lineas == null or lineas.empty}">
+                                <span th:text="'Lista Vacia'">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

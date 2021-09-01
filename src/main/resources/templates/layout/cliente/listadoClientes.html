@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado Clientes</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoClientes" id="clientes">
+            <div class="container table-responsive">
+                <div class="row ">
+                    <div class="col-md-13">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de clientes</h4>
+                            </div>
+                            <div th:if="${clientes != null and !clientes.empty}">
+                                
+                                <table class="table table-bordered table-dark">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="Nombre"></th>
+                                            <th th:text="Apellido"></th>
+                                            <th th:text="DPI"></th>
+                                            <th th:text="NIT"></th>
+                                            <th th:text="Direccion"></th>
+                                            <th th:text="Telefono"></th>
+                                            <th th:text="Celular"></th>
+                                            <th th:text="'Correo Electronico'"></th>
+                                            <th th:text="Genero"></th>
+                                            <th th:text="'Fecha de nacimiento'"></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="cliente, contador : ${clientes}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${cliente.nombre}]] </td>
+                                            <td>[[${cliente.apellido}]]</td>
+                                            <td>[[${cliente.dpi}]]</td>
+                                            <td>[[${cliente.nit}]]</td>
+                                            <td>[[${cliente.direccion}]]</td>
+                                            <td>[[${cliente.telefono}]]</td>
+                                            <td>[[${cliente.celular}]]</td>
+                                            <td>[[${cliente.email}]]</td>
+                                            <td th:if="${cliente.id_genero == '1'}">Hombre</td>
+                                            <td th:if="${cliente.id_genero == '2'}">Mujer</td>
+                                            <td>[[${cliente.fechadenacimiento}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${cliente.id_cliente}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> Editar
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminar(id_cliente=${cliente.id_cliente})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${clientes == null or clientes.empty}">
+                                <span th:text="#{cliente.lista-vacia}">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

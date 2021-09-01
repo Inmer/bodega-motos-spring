@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Agregar Cliente</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="agregarCliente">
+            <div id="agregarCliente" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" th:text="'Agregar Cliente'">Agregar Cliente</h5>
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div> 
+                        <form th:action="@{/guardar}" th:object="${cliente}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label for="nombre" th:text="Nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="apellido" th:text="Apellido">Apellido</label>
+                                    <input type="text" class="form-control" name="apellido" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dpi" th:text="DPI">DPI</label>
+                                    <input type="text" class="form-control" name="dpi" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nit" th:text="NIT">NIT</label>
+                                    <input type="text" class="form-control" name="nit" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="direccion" th:text="Dirección">Dirección</label>
+                                    <input type="text" class="form-control" name="direccion" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefono" th:text="Teléfono">Teléfono</label>
+                                    <input type="tel" class="form-control" name="telefono">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="celular" th:text="Celular">Celular</label>
+                                    <input type="tel" class="form-control" name="celular">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" th:text="'Correo electronico'">Correo electronico</label>
+                                    <input type="email" class="form-control" name="email" required="true">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_genero" th:text="Genero">Genero</label>
+                                    
+                                    <select type="number" class="form-control" name="id_genero" >
+                                        <option th:value="0" >Seleccion Genero</option>
+                                         <option th:each="genero, contador : ${generos}" th:value=${genero.id_genero} th:text="${genero.nombre}" ></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fechadenacimiento" th:text="'Fecha de Nacimiento'">Fecha de Nacimiento</label>
+                                    <input type="date" value="1999-01-01" min="1950-01-01" max="2030-12-31" class="form-control" name="fechadenacimiento" placeholder="YYYY-MM-DD"/>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" th:text="Guardar">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

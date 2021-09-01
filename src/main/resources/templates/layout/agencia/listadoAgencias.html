@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado Agencias</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoAgencias" id="agencias">
+            <div class="container table-responsive">
+                <div class="row ">
+                    <div class="col-md-13">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de agencias</h4>
+                            </div>
+                            <div th:if="${agencias != null and !agencias.empty}">
+                                <table class="table table-bordered table-dark">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="Nombre"></th>
+                                            <th th:text="Direccion"></th>
+                                            <th th:text="'Fecha de apertura'"></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="agencia, contador : ${agencias}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${agencia.nombre}]] </td>
+                                            <td>[[${agencia.direccion}]]</td>
+                                            <td>[[${agencia.fechaapertura}]]</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarAgencia/} + ${agencia.id_agencia}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> Editar
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarAgencia(id_agencia=${agencia.id_agencia})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${agencias == null or agencias.empty}">
+                                <span th:text="'Lista de Agencias Vacia'">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

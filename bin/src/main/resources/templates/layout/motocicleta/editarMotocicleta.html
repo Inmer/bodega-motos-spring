@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Editar Motocicleta</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="editarMotocicleta">
+            <form th:action="@{/guardarMotocicleta}" th:object="${motocicleta}"
+                  method="POST" class="was-validated">
+                <input type="hidden" name="id_motocicleta" th:field="*{id_motocicleta}"/>
+                <section th:replace="layout/motocicleta/botonesEditarMotocicleta :: botonesEditarMotocicleta"></section>
+                <div id="details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Editar</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="id_cliente" th:text="DPI">DPI</label>
+                                                <select type="number" class="form-control" name="id_cliente" th:field="*{id_cliente}">
+                                                    <option th:value="0" >Seleccione dpi cliente</option>
+                                                    <option th:each="cliente, contador : ${clientes}" th:value=${cliente.id_cliente}  >[[${cliente.dpi}]]</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fecha_recepcion" th:text="'Fecha de Recepcion'">Fecha de Recepcion</label>
+                                                <input type="date" value="2019-01-01" min="2019-01-01" max="2030-12-31" class="form-control" name="fecha_recepcion" placeholder="YYYY-MM-DD" th:field="*{fecha_recepcion}"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fecha_retiro" th:text="'Fecha de Retiro'">Fecha de Retiro</label>
+                                                <input type="date" value="2019-01-01" min="2019-01-01" max="2030-12-31" class="form-control" name="fecha_retiro" placeholder="YYYY-MM-DD" th:field="*{fecha_retiro}"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_agencia" th:text="Agencia">Agencia</label>
+                                                <select type="number" class="form-control" name="id_agencia"  th:field="*{id_agencia}">
+                                                    <option th:value="0" >Seleccione Agencia</option>
+                                                    <option th:each="agencia, contador : ${agencias}" th:value=${agencia.id_agencia}  >[[${agencia.nombre}]]</option>
+                                                </select>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label for="placa" th:text="Placa">Placa</label>
+                                                <input type="text" class="form-control" name="placa" required="true" th:field="*{placa}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="numero_motor" th:text="Motor">Motor</label>
+                                                <input type="text" class="form-control" name="numero_motor" required="true" th:field="*{numero_motor}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="numero_chasis" th:text="Chasis">Chasis</label>
+                                                <input type="text" class="form-control" name="numero_chasis" required="true" th:field="*{numero_chasis}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_linea" th:text="Linea">Linea</label>
+                                                <select type="number" class="form-control" name="id_linea" th:field="*{id_linea}" >
+                                                    <option th:value="0" >Seleccione Linea</option>
+                                                    <option th:each="linea, contador : ${lineas}" th:value=${linea.id_linea}  >[[${linea.nombre}]]</option>
+                                                </select>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label for="modelo" th:text="Modelo">Modelo</label>
+                                                <input type="text" class="form-control" name="modelo" required="true" th:field="*{modelo}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="comentario" th:text="Comentario">comentario</label>
+                                                <input type="text" class="form-control" name="comentario" required="true" th:field="*{comentario}">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit" th:text="Guardar">Guardar</button>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>
+

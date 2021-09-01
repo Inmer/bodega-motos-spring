@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Editar Agencia</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="editarAgencia">
+            <form th:action="@{/guardarAgencia}" th:object="${agencia}"
+                  method="POST" class="was-validated">
+                <input type="hidden" name="id_agencia" th:field="*{id_agencia}"/>
+                <section th:replace="layout/agencia/botonesEditarAgencia :: botonesEditarAgencia"></section>
+                <div id="details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Editar</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre" 
+                                                   required="true" th:field="*{nombre}"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="direccion">Direccion</label>
+                                            <input type="text" class="form-control" name="direccion" 
+                                                   required="true" th:field="*{direccion}"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fechaapertura" th:text="'Fecha de Apertura'">Fecha de Apertura</label>
+                                            <input type="date" value="1999-01-01" min="1950-01-01" max="2030-12-31" class="form-control" name="fechaapertura" placeholder="YYYY-MM-DD"/>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Listado Motocicletas</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoMotocicletas" id="motocicletas">
+            <div class="container table-responsive">
+                <div class="row ">
+                    <div class="col-md-13">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de motocicletas</h4>
+                            </div>
+                            <div th:if="${motocicletas != null and !motocicletas.empty}">
+                                
+                                <table class="table table-bordered table-dark">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="Cliente"></th>
+                                            <th th:text="'Fecha Recepcion'"></th>
+                                            <th th:text="'Fecha Retiro'"></th>
+                                            <th th:text="Agencia"></th>
+                                            <th th:text="Placa"></th>
+                                            <th th:text="Linea"></th>
+                                            <th th:text="Modelo"></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="motocicleta, contador : ${motocicletas}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>
+                                                <p th:each= "cliente : ${clientes}">
+                                                    <span th:if="${cliente.id_cliente} eq ${motocicleta.id_cliente}" >  [[${cliente.nombre}]] [[${cliente.apellido}]]</span>
+                                                </p>
+                                            </td>
+                                            <td>[[${motocicleta.fecha_recepcion}]] </td>
+                                            <td>[[${motocicleta.fecha_retiro}]] </td>
+                                            <td>
+                                                <p th:each= "agencia : ${agencias}">
+                                                    <span th:if="${agencia.id_agencia} eq ${motocicleta.id_agencia}" >  [[${agencia.nombre}]]</span>
+                                                </p>
+                                            </td>
+                                            <td>[[${motocicleta.placa}]] </td>
+                                            <td>
+                                                <p th:each= "linea : ${lineas}">
+                                                    <span th:if="${linea.id_linea} eq ${motocicleta.id_linea}" >  [[${linea.nombre}]]</span>
+                                                </p>
+                                            </td>
+                                            <td>[[${motocicleta.modelo}]] </td>
+
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editarMotocicleta/} + ${motocicleta.id_motocicleta}"
+                                                   class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i> Editar
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarMotocicleta(id_motocicleta=${motocicleta.id_motocicleta})}"
+                                                   class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i> Eliminar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${motocicletas == null or motocicletas.empty}">
+                                <span th:text="'Lista Vacia'">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
