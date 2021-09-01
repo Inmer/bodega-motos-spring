@@ -197,7 +197,7 @@ public class ControladorInicio {
         var marcas = marcaService.listarMarca(); 
         model.addAttribute("marcas",marcas);
         if(errores.hasErrors()){
-            return "modificarmotocicleta";
+            return "modificarmotocicletas";
         }
         motocicletaService.guardarMotocicleta(motocicleta);
         return "redirect:/mmotocicletas";
