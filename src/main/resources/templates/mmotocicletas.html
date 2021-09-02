@@ -8,7 +8,7 @@
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <section th:replace="layout/motocicleta/botonesAgregarMotocicleta :: botonesAgregarMotocicleta"></section>
-        <section th:replace="layout/motocicleta/AgregarMotocicleta :: agregarMotocicleta"></section>
+        <section th:replace="layout/motocicleta/agregarMotocicleta :: agregarMotocicleta"></section>
         <section th:replace="layout/motocicleta/listadoMotocicletas :: listadoMotocicletas"></section>
         <div th:if="${clientes == null or clientes.empty}">
             La lista de personas está vacía
