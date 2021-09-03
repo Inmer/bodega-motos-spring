@@ -3,6 +3,7 @@ package gt.com.pm.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,7 +19,7 @@ public class Linea implements Serializable{
     private Long id_linea;
     @NotEmpty
     private String nombre;
-    @NotEmpty
-    private String id_marca;
+    @NotNull
+    private Long id_marca;
     
 }
