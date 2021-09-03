@@ -3,6 +3,7 @@ package gt.com.pm.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,7 +31,8 @@ public class Cliente implements Serializable{
     private String celular;
     @Email
     private String email;
+    @NotNull
+    private Long id_genero;
     @NotEmpty
-    private String id_genero;
     private String fechadenacimiento;
 }
