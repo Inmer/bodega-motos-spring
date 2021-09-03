@@ -47,7 +47,7 @@
                                             <td>[[${cliente.celular}]]</td>
                                             <td>[[${cliente.email}]]</td>
                                             <td th:if="${cliente.id_genero == 1}">Hombre</td>
-                                            <td th:if="${cliente.id_genero == 2}">Mujer</td>
+                                            <td th:if="${cliente.id_genero == '2'}">Mujer</td>
                                             <td>[[${cliente.fechadenacimiento}]]</td>
                                             <td>
                                                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editar/} + ${cliente.id_cliente}"
